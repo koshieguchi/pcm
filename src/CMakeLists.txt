@@ -194,9 +194,21 @@ foreach(PROJECT_NAME ${PROJECT_NAMES})
         set(LIBS ${LIBS} PCM_SIMDJSON)
     endif(${PROJECT_NAME} STREQUAL pcm-raw)
 
-    # if(${PROJECT_NAME} STREQUAL pcm-pcie-exporter)
-        # pcm-pcie-exporter specific settings if needed
-    # endif()
+    if(${PROJECT_NAME} STREQUAL pcm-pcie-exporter)
+        # Find and link Prometheus libraries
+        find_package(prometheus-cpp CONFIG REQUIRED)
+        target_link_libraries(${PROJECT_NAME} PRIVATE prometheus-cpp::core prometheus-cpp::pull)
+
+        # Add any project-specific definitions or options
+        target_compile_definitions(${PROJECT_NAME} PRIVATE EXPORTER_ENABLED)
+        target_compile_options(${PROJECT_NAME} PRIVATE -Wall)
+
+        # Include directories if necessary
+        target_include_directories(${PROJECT_NAME} PRIVATE ${YOUR_INCLUDE_PATHS})
+
+        # If additional libraries are needed, link them here
+        target_link_libraries(${PROJECT_NAME} PRIVATE ${ADDITIONAL_LIBS})
+    endif()
 
     if(${PROJECT_NAME} STREQUAL pcm-sensor-server)
       if(NO_SSL)
