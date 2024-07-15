@@ -4,7 +4,7 @@
 include(FindOpenSSL)
 
 # All pcm-* executables
-set(PROJECT_NAMES pcm pcm-numa pcm-latency pcm-power pcm-msr pcm-memory pcm-tsx pcm-pcie pcm-core pcm-iio pcm-lspci pcm-pcicfg pcm-mmio pcm-tpmi pcm-raw pcm-accel)
+set(PROJECT_NAMES pcm pcm-numa pcm-latency pcm-power pcm-msr pcm-memory pcm-tsx pcm-pcie pcm-core pcm-iio pcm-lspci pcm-pcicfg pcm-mmio pcm-tpmi pcm-raw pcm-accel pcm-pcie-exporter)
 
 set(MINIMUM_OPENSSL_VERSION 1.1.1)
 
@@ -193,6 +193,10 @@ foreach(PROJECT_NAME ${PROJECT_NAMES})
     if(${PROJECT_NAME} STREQUAL pcm-raw)
         set(LIBS ${LIBS} PCM_SIMDJSON)
     endif(${PROJECT_NAME} STREQUAL pcm-raw)
+
+    # if(${PROJECT_NAME} STREQUAL pcm-pcie-exporter)
+        # pcm-pcie-exporter specific settings if needed
+    # endif()
 
     if(${PROJECT_NAME} STREQUAL pcm-sensor-server)
       if(NO_SSL)

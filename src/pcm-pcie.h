@@ -50,6 +50,8 @@ public:
     virtual void printEvents() = 0;
     virtual void printAggregatedEvents() = 0;
     virtual void cleanup() = 0;
+    virtual uint64 getReadBw() = 0;
+    virtual uint64 getWriteBw() = 0;
     static IPlatform *getPlatform(PCM* m, bool csv, bool bandwidth,
                                         bool verbose, uint32 delay);
     virtual ~IPlatform() { }
@@ -144,13 +146,15 @@ public:
                 events_.resize(eventsCount);
         }
     };
+    virtual uint64 getReadBw() = 0;
+    virtual uint64 getWriteBw() = 0;
 
 protected:
     vector<vector<uint64>> eventSample;
     virtual uint64 getReadBw(uint socket, eventFilter filter) = 0;
     virtual uint64 getWriteBw(uint socket, eventFilter filter) = 0;
-    virtual uint64 getReadBw() = 0;
-    virtual uint64 getWriteBw() = 0;
+    // virtual uint64 getReadBw() = 0;
+    // virtual uint64 getWriteBw() = 0;
     virtual uint64 event(uint socket, eventFilter filter, uint idx) = 0;
 };
 
@@ -359,6 +363,9 @@ public:
     {
     };
 
+    virtual uint64 getReadBw();
+    virtual uint64 getWriteBw();
+
 private:
     enum eventIdx {
         PCIRdCur,
@@ -386,8 +393,8 @@ private:
 
     virtual uint64 getReadBw(uint socket, eventFilter filter);
     virtual uint64 getWriteBw(uint socket, eventFilter filter);
-    virtual uint64 getReadBw();
-    virtual uint64 getWriteBw();
+    // virtual uint64 getReadBw();
+    // virtual uint64 getWriteBw();
     virtual uint64 event(uint socket, eventFilter filter, uint idx);
 };
 
@@ -489,6 +496,8 @@ public:
                         m, csv, bandwidth, verbose, delay)
     {
     };
+    virtual uint64 getReadBw();
+    virtual uint64 getWriteBw();
 
 private:
     enum eventIdx {
@@ -517,8 +526,8 @@ private:
 
     virtual uint64 getReadBw(uint socket, eventFilter filter);
     virtual uint64 getWriteBw(uint socket, eventFilter filter);
-    virtual uint64 getReadBw();
-    virtual uint64 getWriteBw();
+    // virtual uint64 getReadBw();
+    // virtual uint64 getWriteBw();
     virtual uint64 event(uint socket, eventFilter filter, uint idx);
 };
 
@@ -618,6 +627,8 @@ public:
                         m, csv, bandwidth, verbose, delay)
     {
     };
+    virtual uint64 getReadBw();
+    virtual uint64 getWriteBw();
 
 private:
     enum eventIdx {
@@ -642,8 +653,8 @@ private:
 
     virtual uint64 getReadBw(uint socket, eventFilter filter);
     virtual uint64 getWriteBw(uint socket, eventFilter filter);
-    virtual uint64 getReadBw();
-    virtual uint64 getWriteBw();
+    // virtual uint64 getReadBw();
+    // virtual uint64 getWriteBw();
     virtual uint64 event(uint socket, eventFilter filter, uint idx);
 };
 
@@ -747,6 +758,8 @@ public:
                         m, csv, bandwidth, verbose, delay)
     {
     };
+    virtual uint64 getReadBw();
+    virtual uint64 getWriteBw();
 
 private:
     enum eventIdx {
@@ -778,8 +791,8 @@ private:
 
     virtual uint64 getReadBw(uint socket, eventFilter filter);
     virtual uint64 getWriteBw(uint socket, eventFilter filter);
-    virtual uint64 getReadBw();
-    virtual uint64 getWriteBw();
+    // virtual uint64 getReadBw();
+    // virtual uint64 getWriteBw();
     virtual uint64 event(uint socket, eventFilter filter, uint idx);
 };
 
@@ -860,6 +873,9 @@ public:
     {
     };
 
+    virtual uint64 getReadBw();
+    virtual uint64 getWriteBw();
+
 private:
     enum eventIdx {
         PCIRdCur,
@@ -890,8 +906,8 @@ private:
 
     virtual uint64 getReadBw(uint socket, eventFilter filter);
     virtual uint64 getWriteBw(uint socket, eventFilter filter);
-    virtual uint64 getReadBw();
-    virtual uint64 getWriteBw();
+    // virtual uint64 getReadBw();
+    // virtual uint64 getWriteBw();
     virtual uint64 event(uint socket, eventFilter filter, uint idx);
 };
 
@@ -971,6 +987,8 @@ public:
                         m, csv, bandwidth, verbose, delay)
     {
     };
+    virtual uint64 getReadBw();
+    virtual uint64 getWriteBw();
 
 private:
     enum eventIdx {
@@ -999,8 +1017,8 @@ private:
 
     virtual uint64 getReadBw(uint socket, eventFilter filter);
     virtual uint64 getWriteBw(uint socket, eventFilter filter);
-    virtual uint64 getReadBw();
-    virtual uint64 getWriteBw();
+    // virtual uint64 getReadBw();
+    // virtual uint64 getWriteBw();
     virtual uint64 event(uint socket, eventFilter filter, uint idx);
 };
 
